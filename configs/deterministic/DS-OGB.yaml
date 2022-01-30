@@ -1,0 +1,38 @@
+program: main.py
+method: grid
+parameters:
+  gnn_type:
+    values: ['gin', 'gcn']
+  num_layer:
+    value: 5
+  emb_dim:
+    value: 300
+  batch_size:
+    value: 32
+  learning_rate:
+    values: [0.001, 0.0001]
+  decay_rate:
+    value: 0.5
+  decay_step:
+    value: 50
+  epochs:
+    value: 100
+  dataset:
+    values: ['ogbg-molhiv', 'ogbg-moltox21']
+  jk:
+    value: 'last'
+  drop_ratio:
+    value: 0.5
+  channels:
+    values: ['32-32', '64-64']
+  policy:
+    values: ['edge_deleted', 'node_deleted', 'ego_nets', 'ego_nets_plus']
+  model:
+    value: 'deepsets'
+  seed:
+    values: [1,2,3,4,5,6,7,8,9,10]
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}

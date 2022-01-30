@@ -1,0 +1,36 @@
+program: main.py
+method: grid
+parameters:
+  gnn_type:
+    value: 'graphconv'
+  num_layer:
+    value: 3
+  emb_dim:
+    value: 64
+  batch_size:
+    values: [32, 128]
+  learning_rate:
+    values: [0.01, 0.001]
+  decay_rate:
+    value: 0.5
+  decay_step:
+    value: 50
+  epochs:
+    value: 350
+  dataset:
+    values: ['MUTAG', 'PTC', 'PROTEINS', 'NCI1', 'NCI109', 'IMDB-BINARY', 'IMDB-MULTI']
+  jk:
+    value: 'last'
+  drop_ratio:
+    value: 0.
+  channels:
+    values: ['64-64']
+  policy:
+    values: ['original']
+  model:
+    value: 'gnn'
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}

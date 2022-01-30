@@ -1,0 +1,34 @@
+program: main.py
+method: grid
+parameters:
+  gnn_type:
+    value: 'zincgin'
+  num_layer:
+    value: 4
+  emb_dim:
+    value: 64
+  batch_size:
+    value: 128
+  learning_rate:
+    values: [0.001]
+  epochs:
+    value: 400
+  dataset:
+    value: 'ZINC'
+  jk:
+    value: 'concat'
+  drop_ratio:
+    value: 0.
+  channels:
+    values: ['96', '96-96']
+  policy:
+    values: ['edge_deleted', 'node_deleted', 'ego_nets', 'ego_nets_plus']
+  model:
+    value: 'deepsets'
+  seed:
+    values: [1,2,3,4,5,6,7,8,9,10]
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}

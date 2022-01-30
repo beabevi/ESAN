@@ -1,0 +1,38 @@
+program: main.py
+method: grid
+parameters:
+  gnn_type:
+    values: ['originalgin']
+  num_layer:
+    values: [6]
+  emb_dim:
+    values: [32]
+  batch_size:
+    values: [32, 128]
+  learning_rate:
+    values: [0.01, 0.001]
+  decay_rate:
+    value: 0.5
+  decay_step:
+    value: 50
+  epochs:
+    value: 350
+  dataset:
+    values: ['EXP', 'CEXP']
+  jk:
+    value: 'concat'
+  drop_ratio:
+    value: 0.
+  channels:
+    values: ['64-64', '32-32']
+  policy:
+    values: ['edge_deleted', 'node_deleted', 'ego_nets', 'ego_nets_plus']
+  model:
+    values: ['deepsets', 'dss']
+  fraction:
+    values: [0.05, 0.2, 0.5]
+command:
+  - ${env}
+  - ${interpreter}
+  - ${program}
+  - ${args}
