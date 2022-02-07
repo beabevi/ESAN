@@ -13,7 +13,10 @@ First create a conda environment
 ```
 conda env create -f environment.yml
 ```
-and activate it.
+and activate it
+```
+conda activate subgraph
+```
 
 ## Prepare the data
 Run
