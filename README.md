@@ -1,7 +1,7 @@
 # Equivariant Subgraph Aggregation Networks (ESAN)
 
 This repository contains the official code of the paper
-**[Equivariant Subgraph Aggregation Networks](https://arxiv.org/abs/2110.02910) (ICLR 2022)**
+**[Equivariant Subgraph Aggregation Networks](https://arxiv.org/abs/2110.02910) (ICLR 2022 Spotlight)**
 
 <p align="center">
 <img src=./symmetries.png width=50% height=50%>
