@@ -539,8 +539,8 @@ def policy2transform(policy: str, num_hops, process_subgraphs=lambda x: x, pbar=
 
 def main():
     parser = argparse.ArgumentParser(description='Data downloading and preprocessing')
-    parser.add_argument('--dataset', type=str, default='ogbg-molhiv',
-                        help='which dataset to preprocess (default: ogbg-molhiv)')
+    parser.add_argument('--dataset', type=str, default='ZINC',
+                        help='which dataset to preprocess (default: ZINC)')
     parser.add_argument('--policies', type=str, nargs='+', help='which policies to preprocess (default: all)')
     args = parser.parse_args()
 

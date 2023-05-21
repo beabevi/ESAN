@@ -12,7 +12,7 @@ from csl_data import MyGNNBenchmarkDataset
 # noinspection PyUnresolvedReferences
 from data import policy2transform, preprocess, SubgraphData, TUDataset, PTCDataset, Sampler
 from gnn_rni_data import PlanarSATPairsDataset
-from models import GNN, GNNComplete, DSnetwork, DSSnetwork, EgoEncoder, ZincAtomEncoder
+from models import GNN, GNNComplete, DSnetwork, DSSnetwork, EgoEncoder, ZincAtomEncoder, DSSnetwork_Atten
 
 
 def get_data(args, fold_idx):
@@ -107,7 +107,6 @@ def get_model(args, in_dim, out_dim, device):
         encoder = ZincAtomEncoder(policy=args.policy, emb_dim=args.emb_dim)
 
     if args.model == 'deepsets':
-
         subgraph_gnn = GNN(gnn_type=args.gnn_type, num_tasks=out_dim, num_layer=args.num_layer, in_dim=in_dim,
                            emb_dim=args.emb_dim, drop_ratio=args.drop_ratio, JK=args.jk,
                            graph_pooling='sum' if args.gnn_type != 'gin' else 'mean', feature_encoder=encoder
@@ -116,7 +115,6 @@ def get_model(args, in_dim, out_dim, device):
                           invariant=args.dataset == 'ZINC').to(device)
 
     elif args.model == 'dss':
-
         if args.gnn_type == 'gin':
             GNNConv = GINConv
         elif args.gnn_type == 'originalgin':
@@ -130,8 +128,14 @@ def get_model(args, in_dim, out_dim, device):
         else:
             raise ValueError('Undefined GNN type called {}'.format(args.gnn_type))
 
-        model = DSSnetwork(num_layers=args.num_layer, in_dim=in_dim, emb_dim=args.emb_dim, num_tasks=out_dim,
-                           feature_encoder=encoder, GNNConv=GNNConv).to(device)
+        if args.use_attention:
+            model = DSSnetwork_Atten(num_layers=args.num_layer, in_dim=in_dim, emb_dim=args.emb_dim, num_tasks=out_dim,
+                               feature_encoder=encoder, GNNConv=GNNConv, num_heads_attn=args.num_heads_attn).to(device)
+        else:
+            model = DSSnetwork(num_layers=args.num_layer, in_dim=in_dim, emb_dim=args.emb_dim, num_tasks=out_dim,
+                               feature_encoder=encoder, GNNConv=GNNConv).to(device)
+
+
 
     elif args.model == 'gnn':
         num_random_features = int(args.random_ratio * args.emb_dim)
